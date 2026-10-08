@@ -264,14 +264,8 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
           <input id="f-company" name="company" type="text" autocomplete="organization">
         </div>
         <div class="field full">
-          <label for="f-help">What are you looking for help with?</label>
-          <select id="f-help" name="help_with">
-            <option value="">Select one</option>
-            <option value="Data architecture">Data architecture</option>
-            <option value="Tech stack optimization">Tech stack optimization</option>
-            <option value="RevOps">RevOps</option>
-            <option value="Not sure yet">Not sure yet</option>
-          </select>
+          <label for="f-phone">Phone</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel">
         </div>
         <div class="field full">
           <label for="f-message">Message</label>
@@ -304,17 +298,18 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 
 <script>
 (function () {
-  // HubSpot settings. FIELD_MAP: site field name → HubSpot internal property name.
+  // HubSpot settings. FIELD_MAP: site field name → [HubSpot object type, internal property name].
+  // 0-1 = contact property, 0-2 = company property.
   var PORTAL_ID = '46318869';
   var FORM_ID = '1fc819fc-3bb7-4f69-bac2-005442c7903d';
   var ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/' + PORTAL_ID + '/' + FORM_ID;
   var FIELD_MAP = {
-    firstname: 'firstname',
-    lastname: 'lastname',
-    email: 'email',
-    company: 'company',
-    help_with: 'help_with',   // ← set to your dropdown property's internal name
-    message: 'message'
+    firstname: ['0-1', 'firstname'],
+    lastname:  ['0-1', 'lastname'],
+    email:     ['0-1', 'email'],
+    phone:     ['0-1', 'phone'],
+    company:   ['0-2', 'name'],
+    message:   ['0-1', 'message']
   };
   var MIN_FILL_MS = 3000; // bots submit instantly
 
@@ -370,7 +365,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
     Object.keys(FIELD_MAP).forEach(function (key) {
       var el = form.elements[key];
       var value = el ? el.value.trim() : '';
-      if (value) fields.push({ objectTypeId: '0-1', name: FIELD_MAP[key], value: value });
+      if (value) fields.push({ objectTypeId: FIELD_MAP[key][0], name: FIELD_MAP[key][1], value: value });
     });
 
     var context = { pageUri: window.location.href, pageName: document.title };
