@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J Scott Strategy — Data Architecture, Tech Stack &amp; RevOps Consulting</title>
+<meta name="description" content="Jordan Scott helps growth-stage and lower-middle-market companies design data architecture, optimize their tech stack, and build RevOps foundations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--ink:#16181D;--ground:#F3F1EC;--card:#FBFAF7;--line:#D9D5CC;--muted:#3A3D45;--soft:#5A5E66;--accent:#0B6B58;--accent-dark:#084C3F;--mint:#8FD3C1}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:17px;line-height:1.55}
+a{color:var(--accent)}a:hover{color:var(--accent-dark)}
+.wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;margin:0}
+h2{font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-.02em}
+.grid{display:grid;gap:32px}
+.btn{display:inline-block;text-decoration:none;padding:15px 22px;font-weight:600}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-dark);color:#fff}
+.btn-ghost{border:1px solid var(--ink);color:var(--ink);font-weight:500}.btn-ghost:hover{background:var(--ink);color:var(--ground)}
+
+header{border-bottom:1px solid var(--line)}
+.nav{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.01em}
+nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;font-size:15px}
+nav a{color:var(--ink);text-decoration:none;display:inline-block;padding:10px 0}
+nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weight:500}
+
+.hero{padding-top:96px;padding-bottom:80px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:end}
+.hero h1{font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.03em}
+.hero p{margin:0 0 28px;font-size:19px;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+
+.dark{background:var(--ink);color:var(--ground)}
+.pains{padding-top:56px;padding-bottom:56px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.pains .mono{font-size:13px;color:var(--mint);margin-bottom:8px}
+.pains p{margin:0}
+
+.services{padding-top:104px;padding-bottom:40px}
+.services h2,.approach h2{margin-bottom:56px;max-width:760px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
+.cards article{background:var(--card);padding:36px 32px;display:flex;flex-direction:column;gap:16px}
+.cards h3{font-size:24px}
+.cards p{margin:0;color:var(--muted)}
+.cards ul{margin:8px 0 0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+
+.who{padding-top:40px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px}
+.who div{border:1px solid var(--line);padding:28px 32px}
+.who .mono{border:0;padding:0;font-size:13px;color:var(--soft);margin-bottom:8px}
+.who p{margin:0;font-size:18px}
+
+.approach{padding-top:104px;padding-bottom:104px}
+.steps{list-style:none;margin:0;padding:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.steps li{border-top:2px solid var(--ink);padding-top:20px}
+.steps .mono{font-size:14px;color:var(--accent);margin-bottom:10px}
+.steps h3{font-size:22px;margin-bottom:8px}
+.steps p{margin:0;color:var(--muted)}
+
+.stack{background:#E9E6DF;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stack .wrap{padding-top:48px;padding-bottom:48px;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center}
+.stack .label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+.chips li{font-family:'IBM Plex Mono',monospace;font-size:15px;border:1px solid #B9B4A9;padding:8px 14px;background:var(--ground)}
+
+.about{padding-top:104px;padding-bottom:104px;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:64px}
+.headshot{aspect-ratio:4/5;max-width:420px;width:100%;background:#DCD8CF;border:1px solid #C9C4B9;display:flex;align-items:center;justify-content:center;color:var(--soft);font-family:'IBM Plex Mono',monospace;font-size:14px;object-fit:cover}
+.about h2{margin-bottom:24px}
+.about p{margin:0 0 18px;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:24px;border-top:1px solid var(--line);padding-top:24px;margin-top:32px}
+.facts .mono{font-size:13px;color:var(--soft);margin-bottom:8px}
+.facts p{margin:0;font-size:15px;color:var(--ink)}
+
+.contact .wrap{padding-top:96px;padding-bottom:96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:start}
+.contact h2{font-size:clamp(32px,4.5vw,56px);line-height:1.04;margin-bottom:16px}
+.contact p{margin:0 0 24px;color:#C8C5BD;font-size:18px}
+.contact .links a{color:var(--ground);display:inline-block;padding:10px 0;margin-right:24px}
+.form-card{background:var(--card);color:var(--ink);padding:32px;min-height:360px}
+.footer{border-top:1px solid #2E3138}
+.footer .wrap{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:14px;color:#A9A69E}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="J Scott Strategy home">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="10" height="10"/><rect x="16" y="16" width="10" height="10"/><path d="M12 7h9v9"/></svg>
+      <span>J Scott Strategy</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a class="cta" href="#contact">Get in touch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="wrap grid hero">
+  <div>
+    <div class="eyebrow">Data architecture · Tech stack · RevOps</div>
+    <h1>Your revenue data should answer questions, not start arguments.</h1>
+  </div>
+  <div>
+    <p>I help growth-stage and lower-middle-market companies design the data architecture, rationalize the tech stack, and build the RevOps foundation that gives leadership one trusted view of marketing, sales, and finance.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#contact">Start a conversation</a>
+      <a class="btn btn-ghost" href="#services">See how I help</a>
+    </div>
+  </div>
+</section>
+
+<section class="dark" aria-label="Common problems">
+  <div class="wrap grid pains">
+    <div><div class="mono">01 — Sound familiar?</div><p>Marketing, sales, and finance each report a different pipeline number.</p></div>
+    <div><div class="mono">02</div><p>The tool stack grew faster than anyone's ability to connect it — or justify its cost.</p></div>
+    <div><div class="mono">03</div><p>Board reporting still depends on someone's spreadsheet and a long weekend.</p></div>
+    <div><div class="mono">04</div><p>Forecasts are built on data nobody fully trusts.</p></div>
+  </div>
+</section>
+
+<section id="services" class="wrap services">
+  <div class="eyebrow">Services</div>
+  <h2>Three ways I work with revenue and finance leaders.</h2>
+  <div class="cards">
+    <article>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#16181D" stroke-width="1.75" aria-hidden="true"><ellipse cx="18" cy="8" rx="12" ry="4"/><path d="M6 8v20c0 2.2 5.4 4 12 4s12-1.8 12-4V8"/><path d="M6 18c0 2.2 5.4 4 12 4s12-1.8 12-4"/></svg>
+      <h3>Data Architecture</h3>
+      <p>A modern, warehouse-centered foundation that unifies marketing, sales, and financial data into one model the business can build on.</p>
+      <ul>
+        <li>Warehouse and pipeline design (ELT, dbt modeling)</li>
+        <li>Source integration and custom connectors</li>
+        <li>Metric definitions and a single source of truth</li>
+        <li>BI and dashboard ecosystems leadership actually uses</li>
+      </ul>
+    </article>
+    <article>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#16181D" stroke-width="1.75" aria-hidden="true"><rect x="4" y="4" width="12" height="12"/><rect x="20" y="4" width="12" height="12"/><rect x="4" y="20" width="12" height="12"/><path d="M26 20v12M20 26h12"/></svg>
+      <h3>Tech Stack Optimization</h3>
+      <p>An honest audit of what you own, what you use, and what's missing — then a roadmap to consolidate, integrate, and automate.</p>
+      <ul>
+        <li>Stack inventory, overlap, and cost review</li>
+        <li>Integration and systems architecture</li>
+        <li>Automation of manual reporting and handoffs</li>
+        <li>Vendor selection and implementation oversight</li>
+      </ul>
+    </article>
+    <article>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#16181D" stroke-width="1.75" aria-hidden="true"><path d="M4 30h28"/><path d="M6 24l8-8 6 5 10-12"/><path d="M24 9h6v6"/></svg>
+      <h3>Revenue Operations</h3>
+      <p>Strategy and operating rhythm that connects marketing engagement to pipeline, revenue, and margin — so teams align on what moves the business.</p>
+      <ul>
+        <li>Full-funnel reporting and attribution</li>
+        <li>Forecasting and performance frameworks</li>
+        <li>Board and investor-ready KPI reporting</li>
+        <li>Fractional RevOps and analytics leadership</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="wrap grid who" aria-label="Who I work with">
+  <div><div class="mono">Built for</div><p><strong>Lower-middle-market companies</strong> that have outgrown founder-era systems and need reliable visibility to scale, integrate an acquisition, or prepare for what's next.</p></div>
+  <div><div class="mono">Built for</div><p><strong>CROs, CFOs, and CMOs at growth-stage companies</strong> who've outgrown their spreadsheets and point-solution reports.</p></div>
+</section>
+
+<section id="approach" class="wrap approach">
+  <div class="eyebrow">Approach</div>
+  <h2>Strategy first, then the plumbing — and I build the plumbing myself.</h2>
+  <ol class="grid steps">
+    <li><div class="mono">01</div><h3>Assess</h3><p>Map your systems, data flows, and the decisions leadership is trying to make. Find where trust breaks down.</p></li>
+    <li><div class="mono">02</div><h3>Architect</h3><p>Design the target data model, stack, and metric definitions — with a phased roadmap tied to business priorities.</p></li>
+    <li><div class="mono">03</div><h3>Build &amp; automate</h3><p>Implement pipelines, models, and dashboards hands-on, and automate the reporting your team does by hand today.</p></li>
+    <li><div class="mono">04</div><h3>Enable</h3><p>Hand off documentation and operating rhythms so your team owns it — or keep me on as fractional leadership.</p></li>
+  </ol>
+</section>
+
+<section class="stack" aria-label="Tools">
+  <div class="wrap">
+    <div class="mono label">Tools I work in</div>
+    <ul class="chips">
+      <li>Fivetran</li><li>Airbyte</li><li>dbt</li><li>BigQuery</li><li>Python</li><li>HubSpot</li>
+    </ul>
+  </div>
+</section>
+
+<section id="about" class="wrap grid about">
+  <div>
+    <!-- Replace this placeholder with: <img class="headshot" src="headshot.jpg" alt="Jordan Scott"> -->
+    <div class="headshot" role="img" aria-label="Headshot placeholder">[HEADSHOT]</div>
+  </div>
+  <div>
+    <div class="eyebrow">About</div>
+    <h2>Jordan Scott</h2>
+    <p>I've spent my career at the intersection of data engineering and go-to-market — leading analytics and revenue operations engagements for private-equity-backed companies, and data and marketing operations across agencies and growth-stage businesses.</p>
+    <p>My background runs from IT support and web development to analytics engineering, BI, and full-funnel marketing. That range lets me sit with a CFO on Monday and write the pipeline on Tuesday. I built a custom Python connector for LinkedIn that was adopted into Airbyte's public repository.</p>
+    <p>MBA and BBA, University of Kansas.</p>
+    <div class="facts">
+      <div><div class="mono">Industries</div><p>B2B SaaS &amp; digital platforms · Healthcare &amp; life sciences · Industrial &amp; manufacturing · Consumer services · Marketing &amp; advertising</p></div>
+      <div><div class="mono">Previously</div><p>Craig Group · Hunt, Gather · Conversion First Marketing</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="dark contact">
+  <div class="wrap">
+    <div>
+      <h2>Let's find where your data is leaking value.</h2>
+      <p>Tell me a bit about your stack and what you're trying to see. I'll follow up to set up a 30-minute call — no pitch deck required.</p>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/jscottrevops">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="form-card">
+      <!-- HubSpot form (portal 46318869). Replace YOUR-FORM-ID with the form's ID from HubSpot → Marketing → Forms → Share/Embed. -->
+      <script src="https://js.hsforms.net/forms/embed/46318869.js" defer></script>
+      <div class="hs-form-frame" data-region="na1" data-form-id="YOUR-FORM-ID" data-portal-id="46318869"></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="wrap">
+      <span>© 2026 J Scott Strategy</span>
+      <span>Kansas City · Working with clients nationwide</span>
+    </div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
