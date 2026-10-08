@@ -268,6 +268,16 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
           <input id="f-phone" name="phone" type="tel" autocomplete="tel">
         </div>
         <div class="field full">
+          <label for="f-help">What are you looking for help with?</label>
+          <select id="f-help" name="help_with">
+            <option value="">Select one</option>
+            <option value="Data architecture">Data architecture</option>
+            <option value="Tech stack optimization">Tech stack optimization</option>
+            <option value="RevOps">RevOps</option>
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+        </div>
+        <div class="field full">
           <label for="f-message">Message</label>
           <textarea id="f-message" name="message" placeholder="Your current stack, what you're trying to see, timeline…"></textarea>
         </div>
@@ -362,9 +372,15 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
     if (!validate()) { setStatus('Please add your first name and a valid email.', true); return; }
 
     var fields = [];
+    // The dropdown has no HubSpot property of its own; it's prepended to the message.
+    var helpWith = form.elements.help_with.value;
+    var messageText = form.elements.message.value.trim();
+    var combinedMessage = [helpWith ? 'Looking for help with: ' + helpWith : '', messageText]
+      .filter(Boolean).join('\n\n');
+
     Object.keys(FIELD_MAP).forEach(function (key) {
       var el = form.elements[key];
-      var value = el ? el.value.trim() : '';
+      var value = key === 'message' ? combinedMessage : (el ? el.value.trim() : '');
       if (value) fields.push({ objectTypeId: FIELD_MAP[key][0], name: FIELD_MAP[key][1], value: value });
     });
 
