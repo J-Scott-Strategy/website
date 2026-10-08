@@ -308,18 +308,19 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 
 <script>
 (function () {
-  // HubSpot settings. FIELD_MAP: site field name → [HubSpot object type, internal property name].
-  // 0-1 = contact property, 0-2 = company property.
+  // HubSpot settings. FIELD_MAP: site field name → list of [HubSpot object type, internal property name].
+  // 0-1 = contact property, 0-2 = company property. Company is sent to both: the contact's
+  // "Company name" (always saved) and the associated company record's name.
   var PORTAL_ID = '46318869';
   var FORM_ID = '1fc819fc-3bb7-4f69-bac2-005442c7903d';
   var ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/' + PORTAL_ID + '/' + FORM_ID;
   var FIELD_MAP = {
-    firstname: ['0-1', 'firstname'],
-    lastname:  ['0-1', 'lastname'],
-    email:     ['0-1', 'email'],
-    phone:     ['0-1', 'phone'],
-    company:   ['0-2', 'name'],
-    message:   ['0-1', 'message']
+    firstname: [['0-1', 'firstname']],
+    lastname:  [['0-1', 'lastname']],
+    email:     [['0-1', 'email']],
+    phone:     [['0-1', 'phone']],
+    company:   [['0-1', 'company'], ['0-2', 'name']],
+    message:   [['0-1', 'message']]
   };
   var MIN_FILL_MS = 3000; // bots submit instantly
 
@@ -381,7 +382,8 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
     Object.keys(FIELD_MAP).forEach(function (key) {
       var el = form.elements[key];
       var value = key === 'message' ? combinedMessage : (el ? el.value.trim() : '');
-      if (value) fields.push({ objectTypeId: FIELD_MAP[key][0], name: FIELD_MAP[key][1], value: value });
+      if (!value) return;
+      FIELD_MAP[key].forEach(function (t) { fields.push({ objectTypeId: t[0], name: t[1], value: value }); });
     });
 
     var context = { pageUri: window.location.href, pageName: document.title };
