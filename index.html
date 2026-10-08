@@ -11,33 +11,34 @@
 <meta name="description" content="Jordan Scott helps growth-stage and lower-middle-market companies design data architecture, optimize their tech stack, and build RevOps foundations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Nunito+Sans:wght@300;400;500;600&display=swap">
 <style>
 :root{--ink:#16181D;--ground:#F3F1EC;--card:#FBFAF7;--line:#D9D5CC;--muted:#3A3D45;--soft:#5A5E66;--accent:#0B6B58;--accent-dark:#084C3F;--mint:#8FD3C1}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--ground);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:17px;line-height:1.55}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'Nunito Sans',system-ui,sans-serif;font-size:17px;line-height:1.6}
 a{color:var(--accent)}a:hover{color:var(--accent-dark)}
 .wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
-.mono{font-family:'IBM Plex Mono',monospace}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
-h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;margin:0}
-h2{font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-.02em}
+.mono{font-family:'Nunito Sans',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.18em}
+.eyebrow{font-family:'Nunito Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;margin:0}
+h3{font-weight:600}
+h2{font-size:clamp(36px,4.6vw,56px);line-height:1.05;letter-spacing:0}
 .grid{display:grid;gap:32px}
-.btn{display:inline-block;text-decoration:none;padding:15px 22px;font-weight:600}
+.btn{display:inline-block;text-decoration:none;padding:15px 24px;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
 .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-dark);color:#fff}
 .btn-ghost{border:1px solid var(--ink);color:var(--ink);font-weight:500}.btn-ghost:hover{background:var(--ink);color:var(--ground)}
 
 header{border-bottom:1px solid var(--line)}
 .nav{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
-.brand span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.01em}
+.brand span{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:25px;letter-spacing:0}
 nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;font-size:15px}
 nav a{color:var(--ink);text-decoration:none;display:inline-block;padding:10px 0}
-nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weight:500}
+nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
 
 .hero{padding-top:96px;padding-bottom:80px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:end}
-.hero h1{font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.03em}
+.hero h1{font-size:clamp(44px,6.6vw,84px);line-height:1;letter-spacing:-.005em}
 .hero p{margin:0 0 28px;font-size:19px;color:var(--muted)}
 .actions{display:flex;flex-wrap:wrap;gap:12px}
 
@@ -50,7 +51,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .services h2,.approach h2{margin-bottom:56px;max-width:760px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
 .cards article{background:var(--card);padding:36px 32px;display:flex;flex-direction:column;gap:16px}
-.cards h3{font-size:24px}
+.cards h3{font-size:30px;line-height:1.1}
 .cards p{margin:0;color:var(--muted)}
 .cards ul{margin:8px 0 0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
 
@@ -63,17 +64,17 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .steps{list-style:none;margin:0;padding:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
 .steps li{border-top:2px solid var(--ink);padding-top:20px}
 .steps .mono{font-size:14px;color:var(--accent);margin-bottom:10px}
-.steps h3{font-size:22px;margin-bottom:8px}
+.steps h3{font-size:28px;margin-bottom:8px}
 .steps p{margin:0;color:var(--muted)}
 
 .stack{background:#E9E6DF;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .stack .wrap{padding-top:48px;padding-bottom:48px;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center}
-.stack .label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.stack .label{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft)}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
-.chips li{font-family:'IBM Plex Mono',monospace;font-size:15px;border:1px solid #B9B4A9;padding:8px 14px;background:var(--ground)}
+.chips li{font-family:'Nunito Sans',sans-serif;font-size:14px;letter-spacing:.06em;border:1px solid #B9B4A9;padding:8px 14px;background:var(--ground)}
 
 .about{padding-top:104px;padding-bottom:104px;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:64px}
-.headshot{aspect-ratio:4/5;max-width:420px;width:100%;background:#DCD8CF;border:1px solid #C9C4B9;display:flex;align-items:center;justify-content:center;color:var(--soft);font-family:'IBM Plex Mono',monospace;font-size:14px;object-fit:cover;object-position:50% 30%}
+.headshot{aspect-ratio:4/5;max-width:420px;width:100%;background:#DCD8CF;border:1px solid #C9C4B9;display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:14px;object-fit:cover;object-position:50% 30%}
 .about h2{margin-bottom:24px}
 .about p{margin:0 0 18px;color:var(--muted)}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:24px;border-top:1px solid var(--line);padding-top:24px;margin-top:32px}
@@ -81,14 +82,14 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .facts p{margin:0;font-size:15px;color:var(--ink)}
 
 .contact .wrap{padding-top:96px;padding-bottom:96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:start}
-.contact h2{font-size:clamp(32px,4.5vw,56px);line-height:1.04;margin-bottom:16px}
+.contact h2{font-size:clamp(36px,5vw,64px);line-height:1.02;margin-bottom:16px}
 .contact p{margin:0 0 24px;color:#C8C5BD;font-size:18px}
 .contact .links a{color:var(--ground);display:inline-block;padding:10px 0;margin-right:24px}
 .lead-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px;border-top:2px solid var(--mint);padding-top:24px}
 .lead-form .full{grid-column:1/-1}
 @media (max-width:560px){.lead-form{grid-template-columns:minmax(0,1fr)}}
 .field{display:flex;flex-direction:column;gap:6px}
-.field label{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;color:#C8C5BD}
+.field label{font-family:'Nunito Sans',sans-serif;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:#C8C5BD}
 .field label .req{color:var(--mint)}
 .field input,.field select,.field textarea{font:inherit;font-size:16px;color:var(--ground);background:#1F2229;border:1px solid #3A3E47;border-radius:0;padding:7px 12px;line-height:1.35;width:100%;transition:border-color .15s}
 .field textarea{min-height:84px;resize:vertical}
@@ -99,7 +100,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:#F2A38A}
 .hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .form-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
-.btn-submit{font:inherit;font-weight:600;font-size:16px;background:var(--mint);color:var(--ink);border:0;padding:10px 22px;cursor:pointer;min-height:42px}
+.btn-submit{font:inherit;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;background:var(--mint);color:var(--ink);border:0;padding:10px 22px;cursor:pointer;min-height:42px}
 .btn-submit:hover{background:#A9E0D1}
 .btn-submit:disabled{opacity:.6;cursor:wait}
 .form-status{font-size:15px;color:#C8C5BD;margin:0}
@@ -107,7 +108,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 [hidden]{display:none!important}
 .form-success{border-top:2px solid var(--mint);padding-top:28px}
 .link-btn{font:inherit;font-size:15px;background:none;border:0;padding:12px 0;margin-top:16px;color:var(--mint);text-decoration:underline;cursor:pointer;min-height:44px}
-.form-success h3{font-size:28px;margin-bottom:12px}
+.form-success h3{font-size:34px;margin-bottom:12px}
 .form-success p{color:#C8C5BD;margin:0}
 .footer{border-top:1px solid #2E3138}
 .footer .wrap{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:14px;color:#A9A69E}
