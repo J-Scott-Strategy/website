@@ -65,7 +65,9 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .actions{display:flex;flex-wrap:wrap;gap:12px}
 
 .dark{background:var(--ink);color:var(--ground)}
-.pains{padding-top:56px;padding-bottom:56px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.pains-head{padding-top:64px}
+.pains-head h2{color:var(--ground);font-style:italic}
+.pains{padding-top:36px;padding-bottom:64px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
 .pains .mono{font-size:13px;color:var(--mint);margin-bottom:8px}
 .pains p{margin:0}
 
@@ -172,7 +174,8 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
   </div>
 </section>
 
-<section class="dark" aria-label="Common problems">
+<section class="dark" aria-labelledby="pains-title">
+  <div class="wrap pains-head"><h2 id="pains-title">Sound familiar?</h2></div>
   <div class="wrap grid pains">
     <div><div class="mono">01</div><p>Marketing, sales, and finance each report a different pipeline number.</p></div>
     <div><div class="mono">02</div><p>The tool stack has grown faster than anyone can connect it or justify the cost.</p></div>
