@@ -80,7 +80,29 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .contact h2{font-size:clamp(32px,4.5vw,56px);line-height:1.04;margin-bottom:16px}
 .contact p{margin:0 0 24px;color:#C8C5BD;font-size:18px}
 .contact .links a{color:var(--ground);display:inline-block;padding:10px 0;margin-right:24px}
-.form-card{background:var(--card);color:var(--ink);padding:32px;min-height:360px}
+.lead-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;border-top:2px solid var(--mint);padding-top:28px}
+.lead-form .full{grid-column:1/-1}
+@media (max-width:560px){.lead-form{grid-template-columns:minmax(0,1fr)}}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;color:#C8C5BD}
+.field label .req{color:var(--mint)}
+.field input,.field select,.field textarea{font:inherit;font-size:16px;color:var(--ground);background:#1F2229;border:1px solid #3A3E47;border-radius:0;padding:13px 14px;width:100%;transition:border-color .15s}
+.field textarea{min-height:120px;resize:vertical}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238FD3C1' stroke-width='1.5'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.field select option{color:var(--ink);background:#fff}
+.field input::placeholder,.field textarea::placeholder{color:#7D8089}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--mint);box-shadow:0 0 0 1px var(--mint)}
+.field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:#F2A38A}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.form-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.btn-submit{font:inherit;font-weight:600;font-size:16px;background:var(--mint);color:var(--ink);border:0;padding:15px 26px;cursor:pointer;min-height:48px}
+.btn-submit:hover{background:#A9E0D1}
+.btn-submit:disabled{opacity:.6;cursor:wait}
+.form-status{font-size:15px;color:#C8C5BD;margin:0}
+.form-status.error{color:#F2A38A}
+.form-success{border-top:2px solid var(--mint);padding-top:28px}
+.form-success h3{font-size:28px;margin-bottom:12px}
+.form-success p{color:#C8C5BD;margin:0}
 .footer{border-top:1px solid #2E3138}
 .footer .wrap{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:14px;color:#A9A69E}
 </style>
@@ -221,10 +243,53 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
         <a href="https://www.linkedin.com/in/jscottrevops">LinkedIn ↗</a>
       </div>
     </div>
-    <div class="form-card">
-      <!-- HubSpot form (portal 46318869). Form: Website contact. -->
-      <script src="https://js.hsforms.net/forms/embed/46318869.js" defer></script>
-      <div class="hs-form-frame" data-region="na1" data-form-id="1fc819fc-3bb7-4f69-bac2-005442c7903d" data-portal-id="46318869"></div>
+    <div>
+      <!-- Custom form → HubSpot Forms API (portal 46318869, form 1fc819fc-…). data-hs-do-not-collect stops HubSpot's
+           "collected forms" from logging a duplicate submission now that the tracking code is on the page. -->
+      <form id="lead-form" class="lead-form" novalidate data-hs-do-not-collect="true">
+        <div class="field">
+          <label for="f-first">First name <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-first" name="firstname" type="text" autocomplete="given-name" required>
+        </div>
+        <div class="field">
+          <label for="f-last">Last name</label>
+          <input id="f-last" name="lastname" type="text" autocomplete="family-name">
+        </div>
+        <div class="field">
+          <label for="f-email">Work email <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-company">Company</label>
+          <input id="f-company" name="company" type="text" autocomplete="organization">
+        </div>
+        <div class="field full">
+          <label for="f-help">What are you looking for help with?</label>
+          <select id="f-help" name="help_with">
+            <option value="">Select one</option>
+            <option value="Data architecture">Data architecture</option>
+            <option value="Tech stack optimization">Tech stack optimization</option>
+            <option value="RevOps">RevOps</option>
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="f-message">Message</label>
+          <textarea id="f-message" name="message" placeholder="Your current stack, what you're trying to see, timeline…"></textarea>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="f-website">Leave this empty</label>
+          <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-actions full">
+          <button class="btn-submit" type="submit">Start the conversation</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+      <div class="form-success" id="form-success" hidden tabindex="-1">
+        <h3>Thanks — message received.</h3>
+        <p id="form-success-msg">I'll be in touch within one business day to find a time to talk.</p>
+      </div>
     </div>
   </div>
   <div class="footer">
@@ -236,5 +301,114 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 </section>
 
 </main>
+
+<script>
+(function () {
+  // HubSpot settings. FIELD_MAP: site field name → HubSpot internal property name.
+  var PORTAL_ID = '46318869';
+  var FORM_ID = '1fc819fc-3bb7-4f69-bac2-005442c7903d';
+  var ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/' + PORTAL_ID + '/' + FORM_ID;
+  var FIELD_MAP = {
+    firstname: 'firstname',
+    lastname: 'lastname',
+    email: 'email',
+    company: 'company',
+    help_with: 'help_with',   // ← set to your dropdown property's internal name
+    message: 'message'
+  };
+  var MIN_FILL_MS = 3000; // bots submit instantly
+
+  var form = document.getElementById('lead-form');
+  if (!form) return;
+  var statusEl = document.getElementById('form-status');
+  var successEl = document.getElementById('form-success');
+  var successMsg = document.getElementById('form-success-msg');
+  var button = form.querySelector('button[type="submit"]');
+  var loadedAt = Date.now();
+
+  function getCookie(name) {
+    var m = document.cookie.match('(?:^|; )' + name + '=([^;]*)');
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+  function setStatus(text, isError) {
+    statusEl.textContent = text;
+    statusEl.className = 'form-status' + (isError ? ' error' : '');
+  }
+  function showSuccess(htmlMessage) {
+    if (htmlMessage) {
+      var tmp = document.createElement('div');
+      tmp.innerHTML = htmlMessage;
+      var text = (tmp.textContent || '').trim();
+      if (text) successMsg.textContent = text;
+    }
+    form.hidden = true;
+    successEl.hidden = false;
+    successEl.focus();
+  }
+  function validate() {
+    var ok = true, firstBad = null;
+    ['f-first', 'f-email'].forEach(function (id) {
+      var el = document.getElementById(id);
+      var bad = !el.value.trim() || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
+      el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      if (bad && !firstBad) firstBad = el;
+      if (bad) ok = false;
+    });
+    if (firstBad) firstBad.focus();
+    return ok;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    setStatus('');
+
+    // Spam checks: honeypot filled or submitted too fast → pretend success, send nothing.
+    if (form.website.value || Date.now() - loadedAt < MIN_FILL_MS) { showSuccess(); return; }
+    if (!validate()) { setStatus('Please add your first name and a valid email.', true); return; }
+
+    var fields = [];
+    Object.keys(FIELD_MAP).forEach(function (key) {
+      var el = form.elements[key];
+      var value = el ? el.value.trim() : '';
+      if (value) fields.push({ objectTypeId: '0-1', name: FIELD_MAP[key], value: value });
+    });
+
+    var context = { pageUri: window.location.href, pageName: document.title };
+    var hutk = getCookie('hubspotutk'); // set by the HubSpot tracking code
+    if (hutk) context.hutk = hutk;
+
+    button.disabled = true;
+    setStatus('Sending…');
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ submittedAt: Date.now(), fields: fields, context: context })
+    })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (data) { return { ok: res.ok, data: data }; });
+      })
+      .then(function (r) {
+        if (r.ok) {
+          if (r.data.redirectUri) { window.location.href = r.data.redirectUri; return; }
+          showSuccess(r.data.inlineMessage);
+        } else {
+          var errs = (r.data && r.data.errors) || [];
+          if (window.console) console.warn('HubSpot form error', errs);
+          var emailErr = errs.some(function (x) { return /EMAIL/.test(x.errorType || ''); });
+          setStatus(emailErr ? 'That email address was not accepted — please check it.' : 'Something went wrong. Please try again, or reach out on LinkedIn.', true);
+          button.disabled = false;
+        }
+      })
+      .catch(function () {
+        setStatus('Network error. Please try again, or reach out on LinkedIn.', true);
+        button.disabled = false;
+      });
+  });
+})();
+</script>
+
+<!-- HubSpot tracking code (sets the hubspotutk cookie used above) -->
+<script type="text/javascript" id="hs-script-loader" async defer src="https://js.hs-scripts.com/46318869.js"></script>
 </body>
 </html>
