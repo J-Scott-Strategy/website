@@ -29,13 +29,35 @@ h2{font-size:clamp(36px,4.6vw,56px);line-height:1.05;letter-spacing:0}
 .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-dark);color:#fff}
 .btn-ghost{border:1px solid var(--ink);color:var(--ink);font-weight:500}.btn-ghost:hover{background:var(--ink);color:var(--ground)}
 
-header{border-bottom:1px solid var(--line)}
-.nav{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px}
+header{border-bottom:1px solid var(--line);position:relative;background:var(--ground);z-index:20}
+.nav{display:flex;flex-wrap:nowrap;gap:16px;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
 .brand span{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:25px;letter-spacing:0}
 nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;font-size:15px}
 nav a{color:var(--ink);text-decoration:none;display:inline-block;padding:10px 0}
 nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.menu-toggle{display:none;align-items:center;justify-content:center;width:48px;height:48px;margin-right:-10px;background:none;border:0;padding:0;color:var(--ink);cursor:pointer}
+.menu-toggle .bars,.menu-toggle .bars::before,.menu-toggle .bars::after{display:block;width:24px;height:2px;background:currentColor;transition:transform .2s,opacity .2s}
+.menu-toggle .bars{position:relative}
+.menu-toggle .bars::before,.menu-toggle .bars::after{content:"";position:absolute;left:0}
+.menu-toggle .bars::before{top:-7px}.menu-toggle .bars::after{top:7px}
+.menu-toggle[aria-expanded="true"] .bars{background:transparent}
+.menu-toggle[aria-expanded="true"] .bars::before{transform:translateY(7px) rotate(45deg)}
+.menu-toggle[aria-expanded="true"] .bars::after{transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:760px){
+  .nav{padding-top:14px;padding-bottom:14px}
+  .brand span{font-size:22px}
+  .menu-toggle{display:inline-flex}
+  #site-nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--ground);border-bottom:1px solid var(--line);box-shadow:0 12px 24px rgba(22,24,29,.08)}
+  #site-nav.open{display:block}
+  #site-nav ul{flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 24px;font-size:17px}
+  #site-nav li{border-top:1px solid var(--line)}
+  #site-nav li:first-child{border-top:0}
+  #site-nav a{display:block;padding:16px 0}
+  #site-nav li:last-child{border-top:0;margin-top:12px}
+  #site-nav a.cta{text-align:center;padding:16px 18px}
+  .hero{padding-top:56px;padding-bottom:64px;gap:32px}
+}
 
 .hero{padding-top:96px;padding-bottom:80px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:end}
 .hero h1{font-size:clamp(44px,6.6vw,84px);line-height:1;letter-spacing:-.005em}
@@ -122,7 +144,8 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
       <svg width="34" height="28" viewBox="0 0 48 40" aria-hidden="true"><rect x="2" y="29" width="26" height="9" fill="currentColor"/><rect x="11" y="16" width="26" height="9" fill="currentColor"/><rect x="20" y="3" width="26" height="9" fill="#0B6B58"/></svg>
       <span>J Scott Strategy</span>
     </a>
-    <nav aria-label="Primary">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span class="bars" aria-hidden="true"></span></button>
+    <nav id="site-nav" aria-label="Primary">
       <ul>
         <li><a href="#services">Services</a></li>
         <li><a href="#approach">Approach</a></li>
@@ -313,6 +336,25 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 </main>
 
 <script>
+(function () {
+  // Mobile menu
+  var toggle = document.querySelector('.menu-toggle');
+  var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  toggle.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); toggle.focus(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (nav.classList.contains('open') && !e.target.closest('header')) setMenu(false);
+  });
+  window.matchMedia('(min-width: 761px)').addEventListener('change', function (m) { if (m.matches) setMenu(false); });
+})();
 (function () {
   // HubSpot settings. FIELD_MAP: site field name → list of [HubSpot object type, internal property name].
   // 0-1 = contact property, 0-2 = company property. Company is sent to both: the contact's
