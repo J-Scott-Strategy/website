@@ -311,6 +311,8 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .form-success h3{font-size:34px;margin-bottom:12px}
 .form-success p{color:#C8C5BD;margin:0}
 .footer{border-top:1px solid #2E3138}
+.footer a{color:#A9A69E}.footer a:hover{color:#F3F1EC}
+.form-note{margin:0;font-size:13px;color:#A9A69E}.form-note a{color:#C8C5BD}
 .footer .wrap{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:14px;color:#A9A69E}
 </style>
 </head>
@@ -511,6 +513,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
           <button class="btn-submit" type="submit">Start the conversation</button>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </div>
+        <p class="form-note full">Your information is handled according to our <a href="privacy.html">Privacy Policy</a>.</p>
       </form>
       <div class="form-success" id="form-success" hidden tabindex="-1">
         <h3>Thank you.</h3>
@@ -521,7 +524,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
   </div>
   <div class="footer">
     <div class="wrap">
-      <span>© 2026 J. Scott Strategy</span>
+      <span>© 2026 J. Scott Strategy · <a href="privacy.html">Privacy</a> · <button type="button" data-cookie-settings>Cookie settings</button></span>
       <span>Kansas City · Working with clients globally</span>
     </div>
   </div>
@@ -676,7 +679,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 })();
 </script>
 
-<!-- HubSpot tracking code (sets the hubspotutk cookie used above) -->
-<script type="text/javascript" id="hs-script-loader" async defer src="https://js.hs-scripts.com/46318869.js"></script>
+<!-- Cookie notice; loads the HubSpot tracking code (hubspotutk cookie) based on consent -->
+<script src="consent.js" defer></script>
 </body>
 </html>
