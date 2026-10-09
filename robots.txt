@@ -1,0 +1,5 @@
+# Allow all search engines and AI crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://jscottstrategy.com/sitemap.xml
