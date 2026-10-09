@@ -159,6 +159,7 @@
     build();
     var choice = readChoice();
     if (trackingAllowed(choice)) scheduleLoad();
+    else if (choice === 'denied') stopHubSpot(); // clear any leftover HubSpot cookies
     if (!choice) show();
     document.addEventListener('click', function (e) {
       if (e.target.closest && e.target.closest('[data-cookie-settings]')) { e.preventDefault(); show(); }
@@ -167,6 +168,9 @@
       if (e.key === 'Escape' && !banner.hidden) decide('dismissed');
     });
   }
+
+  // Lets other scripts (the contact form) check consent before using tracking data.
+  window.jssTrackingAllowed = function () { return trackingAllowed(readChoice()); };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

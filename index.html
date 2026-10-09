@@ -659,7 +659,9 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
     });
 
     var context = { pageUri: window.location.href, pageName: document.title };
-    var hutk = getCookie('hubspotutk'); // set by the HubSpot tracking code
+    // Only link the submission to browsing history if the visitor hasn't declined tracking.
+    var allowed = typeof window.jssTrackingAllowed === 'function' ? window.jssTrackingAllowed() : false;
+    var hutk = allowed ? getCookie('hubspotutk') : null; // set by the HubSpot tracking code
     if (hutk) context.hutk = hutk;
 
     button.disabled = true;
