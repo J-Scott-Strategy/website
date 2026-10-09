@@ -51,6 +51,25 @@
     document.body.appendChild(s);
     loaded = true;
   }
+  // Defer the tracking script until the page has finished loading and the browser is idle,
+  // or until the visitor first interacts, whichever comes first. Keeps it off the critical path.
+  function scheduleLoad() {
+    var started = false;
+    var events = ['scroll', 'pointerdown', 'keydown', 'touchstart'];
+    function go() {
+      if (started) return; started = true;
+      events.forEach(function (ev) { window.removeEventListener(ev, go, true); });
+      loadHubSpot();
+    }
+    events.forEach(function (ev) { window.addEventListener(ev, go, { capture: true, passive: true, once: true }); });
+    function whenIdle() {
+      if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 3000 });
+      else setTimeout(go, 1500);
+    }
+    if (document.readyState === 'complete') whenIdle();
+    else window.addEventListener('load', whenIdle, { once: true });
+  }
+
   function stopHubSpot() {
     if (loaded) {
       window._hsq = window._hsq || [];
@@ -139,7 +158,7 @@
   function init() {
     build();
     var choice = readChoice();
-    if (trackingAllowed(choice)) loadHubSpot();
+    if (trackingAllowed(choice)) scheduleLoad();
     if (!choice) show();
     document.addEventListener('click', function (e) {
       if (e.target.closest && e.target.closest('[data-cookie-settings]')) { e.preventDefault(); show(); }
