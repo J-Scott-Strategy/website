@@ -295,7 +295,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .field select option{color:var(--ink);background:#fff}
 .field input::placeholder,.field textarea::placeholder{color:#7D8089}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--mint);box-shadow:0 0 0 1px var(--mint)}
-.field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:#F2A38A}
+.field input[aria-invalid="true"],.field select[aria-invalid="true"],.field textarea[aria-invalid="true"]{border-color:#F2A38A}
 .hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .form-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
 .btn-submit{font:inherit;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;background:var(--mint);color:var(--ink);border:0;padding:10px 22px;cursor:pointer;min-height:42px}
@@ -472,24 +472,24 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
           <input id="f-first" name="firstname" type="text" autocomplete="given-name" required>
         </div>
         <div class="field">
-          <label for="f-last">Last name</label>
-          <input id="f-last" name="lastname" type="text" autocomplete="family-name">
+          <label for="f-last">Last name <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-last" name="lastname" type="text" autocomplete="family-name" required>
         </div>
         <div class="field">
           <label for="f-email">Work email <span class="req" aria-hidden="true">*</span></label>
           <input id="f-email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field">
-          <label for="f-company">Company</label>
-          <input id="f-company" name="company" type="text" autocomplete="organization">
+          <label for="f-company">Company <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-company" name="company" type="text" autocomplete="organization" required>
         </div>
         <div class="field full">
-          <label for="f-phone">Phone</label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+          <label for="f-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
         </div>
         <div class="field full">
-          <label for="f-help">What are you looking for help with?</label>
-          <select id="f-help" name="help_with">
+          <label for="f-help">What are you looking for help with? <span class="req" aria-hidden="true">*</span></label>
+          <select id="f-help" name="help_with" required>
             <option value="">Select one</option>
             <option value="RevOps / CRM">RevOps / CRM</option>
             <option value="Data architecture">Data architecture</option>
@@ -498,8 +498,8 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
           </select>
         </div>
         <div class="field full">
-          <label for="f-message">Message</label>
-          <textarea id="f-message" name="message" placeholder="Your current stack, what you're trying to see, timeline…"></textarea>
+          <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="message" placeholder="Your current stack, what you're trying to see, timeline…" required></textarea>
         </div>
         <div class="hp" aria-hidden="true">
           <label for="f-website">Leave this empty</label>
@@ -603,9 +603,12 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
   });
   function validate() {
     var ok = true, firstBad = null;
-    ['f-first', 'f-email'].forEach(function (id) {
+    ['f-first', 'f-last', 'f-email', 'f-company', 'f-phone', 'f-help', 'f-message'].forEach(function (id) {
       var el = document.getElementById(id);
-      var bad = !el.value.trim() || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
+      var v = el.value.trim();
+      var bad = !v ||
+        (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) ||
+        (el.type === 'tel' && v.replace(/\D/g, '').length < 7);
       el.setAttribute('aria-invalid', bad ? 'true' : 'false');
       if (bad && !firstBad) firstBad = el;
       if (bad) ok = false;
@@ -620,7 +623,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 
     // Spam checks: honeypot filled or submitted too fast → pretend success, send nothing.
     if (form.website.value || Date.now() - loadedAt < MIN_FILL_MS) { showSuccess(); return; }
-    if (!validate()) { setStatus('Please add your first name and a valid email.', true); return; }
+    if (!validate()) { setStatus('Please complete every field, with a valid email and phone number.', true); return; }
 
     var fields = [];
     // The dropdown has no HubSpot property of its own; it's prepended to the message.
