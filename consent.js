@@ -139,8 +139,8 @@
   function setMessage() {
     var link = ' See our <a href="/privacy.html">Privacy Policy</a>.';
     msgEl.innerHTML = optIn
-      ? 'With your permission, this site uses cookies to understand how visitors use it.' + link
-      : 'This site uses cookies to understand how visitors use it.' + link;
+      ? 'With your permission, this site uses cookies. Not the good kind, just the analytics kind.' + link
+      : 'This site uses cookies. Not the good kind, just the analytics kind.' + link;
     acceptBtn.textContent = optIn ? 'Accept' : 'OK';
   }
   function show() { setMessage(); banner.hidden = false; }
