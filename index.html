@@ -288,7 +288,6 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 @media (max-width:560px){.lead-form{grid-template-columns:minmax(0,1fr)}}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label{font-family:'Nunito Sans',sans-serif;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:#C8C5BD}
-.field label .req{color:var(--mint)}
 .field input,.field select,.field textarea{font:inherit;font-size:16px;color:var(--ground);background:#1F2229;border:1px solid #3A3E47;border-radius:0;padding:7px 12px;line-height:1.35;width:100%;transition:border-color .15s}
 .field textarea{min-height:84px;resize:vertical}
 .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238FD3C1' stroke-width='1.5'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
@@ -468,27 +467,27 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
            "collected forms" from logging a duplicate submission now that the tracking code is on the page. -->
       <form id="lead-form" class="lead-form" novalidate data-hs-do-not-collect="true">
         <div class="field">
-          <label for="f-first">First name <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-first">First name</label>
           <input id="f-first" name="firstname" type="text" autocomplete="given-name" required>
         </div>
         <div class="field">
-          <label for="f-last">Last name <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-last">Last name</label>
           <input id="f-last" name="lastname" type="text" autocomplete="family-name" required>
         </div>
         <div class="field">
-          <label for="f-email">Work email <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-email">Work email</label>
           <input id="f-email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field">
-          <label for="f-company">Company <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-company">Company</label>
           <input id="f-company" name="company" type="text" autocomplete="organization" required>
         </div>
         <div class="field full">
-          <label for="f-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-phone">Phone</label>
           <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
         </div>
         <div class="field full">
-          <label for="f-help">What are you looking for help with? <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-help">What are you looking for help with?</label>
           <select id="f-help" name="help_with" required>
             <option value="">Select one</option>
             <option value="RevOps / CRM">RevOps / CRM</option>
@@ -498,7 +497,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
           </select>
         </div>
         <div class="field full">
-          <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-message">Message</label>
           <textarea id="f-message" name="message" placeholder="Your current stack, what you're trying to see, timeline…" required></textarea>
         </div>
         <div class="hp" aria-hidden="true">
