@@ -292,7 +292,8 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 .contact .wrap{padding-top:96px;padding-bottom:96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:start}
 .contact h2{font-size:clamp(36px,5vw,64px);line-height:1.02;margin-bottom:16px}
 .contact p{margin:0 0 24px;color:#C8C5BD;font-size:18px}
-.contact .links a{color:var(--ground);display:inline-block;padding:10px 0;margin-right:24px}
+.profile-link{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 0;font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink)}
+.profile-link:hover{color:var(--accent);border-color:var(--accent)}
 .lead-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px;border-top:2px solid var(--mint);padding-top:24px}
 .lead-form .full{grid-column:1/-1}
 @media (max-width:560px){.lead-form{grid-template-columns:minmax(0,1fr)}}
@@ -439,6 +440,7 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
 <section id="about" class="wrap grid about">
   <div>
     <img class="headshot" src="headshot.jpg" alt="Jordan Scott" width="840" height="840" loading="lazy">
+    <a class="profile-link" href="https://www.linkedin.com/in/jscottrevops" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
   </div>
   <div>
     <div class="eyebrow">About</div>
@@ -471,9 +473,6 @@ nav a.cta{background:var(--ink);color:var(--ground);padding:12px 18px;font-weigh
     <div>
       <h2>Let's talk about your data.</h2>
       <p>Tell me about your stack and what you'd like to improve. I'll follow up to set up a 30-minute call.</p>
-      <div class="links">
-        <a href="https://www.linkedin.com/in/jscottrevops">LinkedIn ↗</a>
-      </div>
     </div>
     <div>
       <!-- Custom form → HubSpot Forms API (portal 46318869, form 1fc819fc-…). data-hs-do-not-collect stops HubSpot's
